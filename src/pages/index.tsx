@@ -16,6 +16,9 @@ export default function Home() {
         <h3>{product.title}</h3>
         <p>{product.desc}</p>
       </a>
+      <p>
+        <button className={styles.button}>Buy Now</button>
+      </p>
     </li>
   ));
 

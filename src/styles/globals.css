@@ -1,9 +1,9 @@
-@tailwind base;
+/* @tailwind base; */
 
 /* Write your own custom base styles here */
 
 /* Start purging... */
-@tailwind components;
+/* @tailwind components; */
 /* Stop purging. */
 
 html,
@@ -23,8 +23,9 @@ a {
   box-sizing: border-box;
 }
 
+
 /* Start purging... */
-@tailwind utilities;
+/* @tailwind utilities; */
 /* Stop purging. */
 
 /* Your own custom utilities */

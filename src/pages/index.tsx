@@ -2,6 +2,7 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 
 import products from '../products.json';
+import initiateCheckout from '../lib/payments';
 
 export default function Home() {
   const renderProducts = products.map(product => (
@@ -17,7 +18,21 @@ export default function Home() {
         <p>{product.desc}</p>
       </a>
       <p>
-        <button className={styles.button}>Buy Now</button>
+        <button
+          className={styles.button}
+          onClick={() => {
+            initiateCheckout({
+              lineItems: [
+                {
+                  price: product.id,
+                  quantity: 1,
+                },
+              ],
+            });
+          }}
+        >
+          Buy Now
+        </button>
       </p>
     </li>
   ));

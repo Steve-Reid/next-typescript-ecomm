@@ -18,6 +18,7 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     'react/jsx-props-no-spreading': 0,
     'react/prop-types': 0,
+    'react/button-has-type': 0,
     'import/no-extraneous-dependencies': [
       'error',
       {
@@ -25,6 +26,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/explicit-function-return-type': 0,
+    '@typescript-eslint/explicit-module-boundary-types': 0,
     'no-unused-vars': 'off',
     'unused-imports/no-unused-imports': 2,
     'unused-imports/no-unused-vars': 1,

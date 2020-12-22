@@ -1,10 +1,63 @@
+import { useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-
-import products from '../products.json';
 import initiateCheckout from '../lib/payments';
+import products from '../products.json';
+
+const defaultCat = {
+  products: {},
+};
 
 export default function Home() {
+  const [cart, setCart] = useState(defaultCat);
+
+  const cartItems = Object.keys(cart.products).map(key => {
+    const product = products.find(({ id }) => `${id}` === `${key}`);
+    return {
+      ...cart.products[key],
+      pricePerItem: product.price,
+    };
+  });
+  console.log('Home -> cartItems', cartItems);
+
+  const subtotal = cartItems.reduce((acc, { pricePerItem, quantity }) => {
+    return acc + pricePerItem * quantity;
+  }, 0);
+  console.log('Home -> subtotal', subtotal);
+
+  const totalItems = cartItems.reduce((acc, { quantity }) => {
+    return acc + quantity;
+  }, 0);
+  console.log('Home -> totalItems', totalItems);
+
+  const addToCart = ({ id }: any = {}) => {
+    setCart(prev => {
+      const cartState = { ...prev };
+
+      if (cartState?.products[id]) {
+        cartState.products[id].quantity += 1;
+      } else {
+        cartState.products[id] = {
+          id,
+          quantity: 1,
+        };
+      }
+
+      return cartState;
+    });
+  };
+
+  const checkout = () => {
+    initiateCheckout({
+      lineItems: cartItems.map(item => {
+        return {
+          price: item.id,
+          quantity: item.quantity,
+        };
+      }),
+    });
+  };
+
   const renderProducts = products.map(product => (
     <li key={product.id} className={styles.card}>
       <a key={product.title} href="https://nextjs.org/docs">
@@ -13,7 +66,7 @@ export default function Home() {
           alt={product.title}
           style={{ maxWidth: '100%' }}
         />
-        <p>{product.price}</p>
+        <p>£{product.price}</p>
         <h3>{product.title}</h3>
         <p>{product.desc}</p>
       </a>
@@ -21,17 +74,12 @@ export default function Home() {
         <button
           className={styles.button}
           onClick={() => {
-            initiateCheckout({
-              lineItems: [
-                {
-                  price: product.id,
-                  quantity: 1,
-                },
-              ],
+            addToCart({
+              id: product.id,
             });
           }}
         >
-          Buy Now
+          Add to Cart
         </button>
       </p>
     </li>
@@ -49,6 +97,16 @@ export default function Home() {
 
         <p className={styles.description}>
           The best space jellyfish swag in the universe!
+        </p>
+
+        <p className={styles.description}>
+          <strong>Items:</strong> {totalItems}
+          <br />
+          <strong>Total Cost:</strong> £{subtotal}
+          <br />
+          <button className={styles.button} onClick={checkout}>
+            Go to Checkout
+          </button>
         </p>
 
         {/**

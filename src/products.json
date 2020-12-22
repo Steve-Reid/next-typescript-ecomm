@@ -4,20 +4,20 @@
     "title": "Space Jelly Tshirt",
     "desc": "Bring Cosmo the space jellyfish to your wardrobe with this high quality tshirt.",
     "imgSrc": "/images/spacejelly-tshirt.jpg",
-    "price": "£20.00"
+    "price": 20
   },
   {
     "id": "price_1Hzno6LfWUQd24mGEwCM0PCm",
     "title": "Space Jelly Stickers",
     "desc": "Add some flare to your laptop with a sticker of Cosmo the space jellyfish.",
     "imgSrc": "/images/spacejelly-stickers.jpg",
-    "price": "£10.00"
+    "price": 10
   },
   {
     "id": "price_1HznoqLfWUQd24mGth1aZnnH",
     "title": "Space Jelly Combo",
     "desc": "Show your love for Cosmo with a tshirt and sticker combo pack!.",
     "imgSrc": "/images/spacejelly-combo.jpg",
-    "price": "£25.00"
+    "price": 25
   }
 ]
